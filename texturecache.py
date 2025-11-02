@@ -21,7 +21,7 @@
 #
 # Simple utility to query, validate, clean and refresh the Kodi texture cache.
 #
-# https://github.com/MilhouseVH/texturecache.py
+# https://github.com/xbmc/texturecache
 #
 # Usage:
 #
@@ -62,7 +62,7 @@ class MyConfiguration(object):
 
     self.VERSION = "2.5.4"
 
-    self.GITHUB = "https://raw.github.com/MilhouseVH/texturecache.py/master"
+    self.GITHUB = "https://raw.github.com/xbmc/texturecache.py/master"
     self.ANALYTICS_GOOD = "http://goo.gl/BjH6Lj"
 
     self.DEBUG = True if os.environ.get("PYTHONDEBUG", "n").lower()=="y" else False

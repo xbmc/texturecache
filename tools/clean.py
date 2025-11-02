@@ -22,7 +22,7 @@
 # Simple utility to match artwork url patterns and generate work items to
 # remove (clean) those items from the XBMC media library.
 #
-# https://github.com/MilhouseVH/texturecache.py/blob/master/tools/clean.py
+# https://github.com/xbmc/texturecache/blob/master/tools/clean.py
 #
 # Usage:
 #

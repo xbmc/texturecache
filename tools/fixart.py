@@ -21,7 +21,7 @@
 #
 # Simple utility to fix artwork URLs.
 #
-# https://github.com/MilhouseVH/texturecache.py/blob/master/tools/fixart.py
+# https://github.com/xbmc/texturecache/blob/master/tools/fixart.py
 #
 # Usage:
 #
