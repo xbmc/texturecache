@@ -62,7 +62,7 @@ class MyConfiguration(object):
 
     self.VERSION = "2.5.4"
 
-    self.GITHUB = "https://raw.github.com/xbmc/texturecache.py/master"
+    self.GITHUB = "https://raw.github.com/xbmc/texturecache/master"
     self.ANALYTICS_GOOD = "http://goo.gl/BjH6Lj"
 
     self.DEBUG = True if os.environ.get("PYTHONDEBUG", "n").lower()=="y" else False
@@ -8181,8 +8181,8 @@ def checkUpdate(argv, forcedCheck=False):
     out_method("", newLine=True)
 
   if forcedCheck:
-    url = gConfig.GITHUB.replace("//raw.","//").replace("/master","/blob/master")
-    gLogger.out("Full changelog: %s/CHANGELOG.md" % url, newLine=True)
+    url = gConfig.GITHUB.replace("//raw.","//").replace("/master","/commits/master")
+    gLogger.out("Full changelog: %s" % url, newLine=True)
 
 def getLatestVersion(argv):
   # Need user agent etc. for analytics
