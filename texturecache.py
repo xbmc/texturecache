@@ -3939,7 +3939,9 @@ class MyWatchedItem(object):
 class MyUtility(object):
   isPython3 = (sys.version_info >= (3, 0))
   isPython3_1 = (sys.version_info >= (3, 1))
-  EPOCH = datetime.datetime.fromtimestamp(0, datetime.UTC)
+  EPOCH = datetime.datetime.fromtimestamp(
+    0, getattr(datetime, "UTC", datetime.timezone.utc)
+  )
 
   DCData = {}
   DCStats = {}
