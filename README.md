@@ -397,13 +397,13 @@ In addition to physical (smb://, nfs:// etc.) paths, the following virtual paths
 
 ## Optional Properties File
 
-By default the script will run fine on distributions where the `.xbmc/userdata` folder is within the users Home folder (ie. `userdata=~/.xbmc/userdata`). To override this default, specify a properties file with a different value for the `userdata` property.
+By default the script will run fine on distributions where the `.kodi/userdata` folder is within the users Home folder (ie. `userdata=~/.kodi/userdata`, or `~/.var/app/tv.kodi.Kodi/data/userdata` in flatpak). To override this default, specify a properties file with a different value for the `userdata` property.
 
 The properties file should be called `texturecache.cfg`, and will be looked for in the current working directory, then in the same directory as the texturecache.py script. What follows is an example properties file showing the default values:
 
 ```properties
 sep = |
-userdata = ~/.xbmc/userdata
+userdata = ~/.kodi/userdata
 dbfile = Database/Textures13.db
 thumbnails = Thumbnails
 xbmc.host = localhost
