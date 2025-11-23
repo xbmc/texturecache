@@ -1,0 +1,69 @@
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    name: Build Windows EXE ({{ matrix.arch }})
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        arch: [x64]
+      fail-fast: false
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11 ({{ matrix.arch }})
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          architecture: ${{ matrix.arch }}
+
+      - name: Install PyInstaller
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller==5.11
+
+      - name: Verify entry point
+        shell: pwsh
+        run: |
+          if (-not (Test-Path -Path ./texturecache.py)) {
+            Write-Error "texturecache.py not found in repository root"
+            exit 1
+          }
+
+      - name: Clean previous build artifacts
+        shell: pwsh
+        run: |
+          Remove-Item -Recurse -Force -ErrorAction SilentlyContinue build dist *.spec
+
+      - name: Build single-file EXE with PyInstaller ({{ matrix.arch }})
+        shell: pwsh
+        run: |
+          # Name includes arch so outputs don't collide
+          $exeName = "texturecache-${{ matrix.arch }}"
+          # Use PyInstaller default icon (no --icon option)
+          pyinstaller --noconfirm --onefile --name $exeName ./texturecache.py
+
+          $out = Join-Path -Path (Get-Location) -ChildPath "dist\$exeName.exe"
+          if (-not (Test-Path -Path $out)) {
+            Write-Error "Build failed: $out not found"
+            exit 1
+          }
+          Write-Host "Built: $out"
+          Get-ChildItem -Path ./dist -Force
+
+      - name: Upload EXE as release asset ({{ matrix.arch }})
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: dist/texturecache-${{ matrix.arch }}.exe
+          asset_name: texturecache-${{ github.event.release.tag_name }}-windows-${{ matrix.arch }}.exe
+          asset_content_type: application/octet-stream
