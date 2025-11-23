@@ -4,7 +4,7 @@ on:
 
 permissions:
   contents: read
-  #release: write
+  packages: write
 
 jobs:
   build:
